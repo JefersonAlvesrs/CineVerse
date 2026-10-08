@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080910" />
+    <meta
+      name="description"
+      content="CineVerse — descubra filmes, crie sua lista e sorteie o que assistir."
+    />
+    <title>CineVerse — Seu universo de cinema</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="#inicio" aria-label="CineVerse início"
+          ><span class="logo-mark">✦</span> CINE<span>VERSE</span></a
+        >
+        <nav class="nav" id="nav" aria-label="Navegação principal">
+          <a href="#inicio">Início</a><a href="#catalogo">Explorar</a
+          ><a href="#minha-lista">Minha lista</a
+          ><a href="#roleta">Surpreenda-me</a>
+        </nav>
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+        <a class="header-list" href="#minha-lista"
+          >♡ <span id="headerCount">0</span>
+          <span class="header-list-label">salvos</span></a
+        >
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-glow"></div>
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="pulse"></span> SEU PRÓXIMO FILME FAVORITO ESTÁ AQUI
+            </div>
+            <h1>HISTÓRIAS QUE<br /><em>FICAM COM VOCÊ.</em></h1>
+            <p>
+              Um universo de filmes extraordinários. Explore, descubra novos
+              favoritos e deixe o acaso escolher sua próxima sessão.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#catalogo"
+                >Explorar filmes <span>↗</span></a
+              ><a class="btn btn-ghost" href="#roleta"
+                >✦ Não sei o que assistir</a
+              >
+            </div>
+            <div class="hero-stats">
+              <div>
+                <strong id="statMovies">24</strong
+                ><small>FILMES SELECIONADOS</small>
+              </div>
+              <div><strong>09</strong><small>GÊNEROS</small></div>
+              <div><strong>∞</strong><small>HISTÓRIAS</small></div>
+            </div>
+          </div>
+          <div class="hero-art" aria-label="Destaque cinematográfico">
+            <div class="poster-stack poster-back" id="heroBack"></div>
+            <div class="poster-stack poster-front" id="heroFront"></div>
+            <div class="hero-badge">
+              <span>✦</span>
+              <div>
+                <b>ESCOLHAS QUE MARCAM</b><small>Curadoria CineVerse</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <div class="container">
+            DISCOVER · WATCH · REPEAT <span>ROLE PARA EXPLORAR ↓</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section catalog-section" id="catalogo">
+        <div class="container">
+          <div class="section-top">
+            <div>
+              <div class="section-kicker">01 / THE COLLECTION</div>
+              <h2>EXPLORE O <span>UNIVERSO.</span></h2>
+              <p>
+                Grandes histórias, novos mundos e filmes que merecem ser vistos.
+              </p>
+            </div>
+            <div class="movie-counter">
+              <strong id="resultCount">24</strong
+              ><small>FILMES ENCONTRADOS</small>
+            </div>
+          </div>
+          <div class="filters">
+            <label class="search-wrap"
+              ><span>⌕</span
+              ><input
+                id="searchInput"
+                type="search"
+                placeholder="Busque por filme, diretor ou ano..."
+                aria-label="Buscar filmes" /></label
+            ><select id="genreSelect" aria-label="Filtrar por gênero">
+              <option value="all">Todos os gêneros</option></select
+            ><select id="sortSelect" aria-label="Ordenar filmes">
+              <option value="featured">Destaques</option>
+              <option value="rating">Melhores avaliações</option>
+              <option value="newest">Mais recentes</option>
+              <option value="oldest">Mais antigos</option>
+              <option value="az">A–Z</option></select
+            ><button class="reset-btn" id="resetFilters">
+              Limpar filtros ↺
+            </button>
+          </div>
+          <div
+            class="filter-pills"
+            id="genrePills"
+            aria-label="Filtros rápidos"
+          ></div>
+          <div class="movie-grid" id="movieGrid"></div>
+          <div class="empty-state hidden" id="emptyState">
+            <span>☾</span>
+            <h3>Nenhum filme encontrado</h3>
+            <p>Tente mudar os filtros ou sua pesquisa.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section list-section" id="minha-lista">
+        <div class="container">
+          <div class="section-top">
+            <div>
+              <div class="section-kicker">02 / YOUR SPACE</div>
+              <h2>SUA LISTA, <span>SUAS HISTÓRIAS.</span></h2>
+              <p>
+                Salve os filmes que quer assistir. Sua lista fica guardada neste
+                navegador.
+              </p>
+            </div>
+            <div class="movie-counter">
+              <strong id="watchCount">0</strong><small>PARA ASSISTIR</small>
+            </div>
+          </div>
+          <div class="my-list-grid" id="watchGrid"></div>
+          <div class="list-empty" id="watchEmpty">
+            <span>♡</span>
+            <h3>Seu próximo favorito está esperando.</h3>
+            <p>Clique em “+ Minha lista” em qualquer filme para começar.</p>
+            <a class="btn btn-outline" href="#catalogo">Explorar catálogo ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section roulette-section" id="roleta">
+        <div class="container roulette-layout">
+          <div class="roulette-copy">
+            <div class="section-kicker">03 / LET FATE DECIDE</div>
+            <h2>NÃO SABE<br />O QUE <span>ASSISTIR?</span></h2>
+            <p>
+              Deixe o destino escolher. A roleta passeia pelas capas, desacelera
+              e revela seu próximo filme.
+            </p>
+            <div class="roulette-options">
+              <label for="rouletteSource">Sortear entre</label
+              ><select id="rouletteSource">
+                <option value="all">Todos os filmes do catálogo</option>
+                <option value="watch">Somente minha lista</option>
+              </select>
+            </div>
+            <button class="btn btn-primary spin-button" id="spinBtn">
+              ✦ SORTEAR UM FILME <span>↗</span>
+            </button>
+            <p class="roulette-hint" id="rouletteHint" role="status">
+              Preparado para uma surpresa?
+            </p>
+          </div>
+          <div class="roulette-stage">
+            <div class="roulette-label">TONIGHT'S PICK <span>✦</span></div>
+            <div class="roulette-viewport">
+              <div class="roulette-track" id="rouletteTrack"></div>
+              <div class="roulette-center-line"></div>
+            </div>
+            <div class="roulette-result" id="rouletteResult" aria-live="polite">
+              Seu próximo filme aparece aqui.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <div class="container">
+          <span>✦ THE END IS JUST THE BEGINNING</span>
+          <h2>MAIS FILMES.<br /><em>MAIS HISTÓRIAS.</em></h2>
+          <a class="btn btn-outline" href="#inicio">Voltar ao início ↑</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container footer-inner">
+        <a class="logo" href="#inicio"
+          ><span class="logo-mark">✦</span> CINE<span>VERSE</span></a
+        >
+        <p>Projeto demonstrativo de portfólio · HTML, CSS e JavaScript</p>
+        <span>FEITO PARA QUEM AMA CINEMA ♥</span>
+      </div>
+    </footer>
+
+    <div
+      class="modal hidden"
+      id="movieModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-shade" data-close="true"></div>
+      <div class="modal-panel">
+        <button class="modal-close" id="closeModal" aria-label="Fechar">
+          ✕
+        </button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </body>
+</html>
