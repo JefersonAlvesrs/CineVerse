@@ -542,11 +542,31 @@ function spin() {
   $("rouletteHint").textContent = "O destino está escolhendo...";
   $("rouletteResult").textContent = "✦ ✦ ✦";
   const chosen = pool[Math.floor(Math.random() * pool.length)];
-  const sequence = Array.from(
-    { length: 32 },
-    () => pool[Math.floor(Math.random() * pool.length)].id,
-  );
+
+  const sequence = [];
+
+  for (let i = 0; i < 32; i++) {
+    const previousId = sequence[i - 1];
+
+    const available = pool.filter((movie) => movie.id !== previousId);
+
+    const options = available.length ? available : pool;
+
+    const randomMovie = options[Math.floor(Math.random() * options.length)];
+
+    sequence.push(randomMovie.id);
+  }
+
   sequence[27] = chosen.id;
+
+  if (sequence[26] === chosen.id && pool.length > 1) {
+    sequence[26] = pool.find((m) => m.id !== chosen.id).id;
+  }
+
+  if (sequence[28] === chosen.id && pool.length > 1) {
+    sequence[28] = pool.find((m) => m.id !== chosen.id).id;
+  }
+
   drawRoulette(sequence);
   const track = $("rouletteTrack");
   const viewport = $("rouletteTrack").parentElement;
